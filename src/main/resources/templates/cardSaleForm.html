@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>The Best Card Dealer!</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Card dealer site">
+    <meta name="author" content="Kevin Croce">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+    <link rel="stylesheet" href="/style/form.css">
+</head>
+
+<body>
+
+    <!-- Header Menu -->
+    <nav class="topNavContainer">
+        <ul>
+            <li><a href="#">Sell card!</a></li>
+            <li><a href="">Home</a></li>
+            <li><a href="../static/cardDetail/cardSale1Details.html">First news card</a></li>
+            <li><a href="../static/cardDetail/cardSale2Details.html">Second news card</a></li>
+            <li><a href="../static/register.html"><img src="../static/images/account.png" height=""></a></li>
+        </ul>
+    </nav>
+
+    <!-- Form di vendita carta -->
+    <div class="formContainer">
+        <h2>Sell Your Card</h2>
+        <form method="POST" enctype="multipart/form-data">
+
+            <label for="cardName">Card Name:</label>
+            <input type="text" id="cardName" name="cardName" required>
+            <br><br>
+
+            <label for="authorAnnouncement">Author Announcement:</label>
+            <input type="text" id="authorAnnouncement" name="authorAnnouncement" required>
+            <br><br><br><br>
+
+            <label for="announcementDate">Announcement Date:</label>
+            <input id="announcementDate" type="date" name="announcementDate" required>
+            <br><br>
+
+            <label for="card-condition">Select Card Condition:</label>
+            <select name="cardCondition" id="card-condition" required>
+                <option value="">--Select Condition--</option>
+                <option value="mint">Mint</option>
+                <option value="near-mint">Near Mint</option>
+                <option value="lightly-played">Lightly Played</option>
+                <option value="moderately-played">Moderately Played</option>
+                <option value="heavily-played">Heavily Played</option>
+                <option value="damaged">Damaged</option>
+            </select>
+            <br><br>
+
+            <label for="descriptiveText">Description:</label>
+            <textarea id="descriptiveText" name="descriptiveText" rows="4" required></textarea>
+            <br><br>
+
+            <label for="cardImage">Insert Card Image:</label>
+            <input type="file" id="cardImage" name="cardImage" accept="image/gif, image/jpeg, image/png" required>
+            <br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Copyleft CC-by 2025 by Kevin Croce</p>
+    </footer>
+
+</body>
+
+</html>
