@@ -1,11 +1,14 @@
 package org.example.webproject.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Getter
+@Getter @Setter @AllArgsConstructor @ToString
 public class Card {
     private String name;
 
@@ -18,14 +21,4 @@ public class Card {
 
     private CardCondition condition;
 
-    @Override
-    public String toString() {
-        return "Card{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", date=" + date +
-                ", author='" + author + '\'' +
-                ", condition=" + condition +
-                '}';
-    }
 }

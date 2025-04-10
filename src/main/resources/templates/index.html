@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <title>The best card dealer!</title>
@@ -17,22 +17,17 @@
     <nav class="topNavContainer">
         <ul>
             <li><a href="/card/new">Sell card!</a></li>
-            <li><a href="#">Home</a></li>
-            <li><a href="../static/cardDetail/cardSale1Details.html">First news card</a></li>
-            <li><a href="../static/cardDetail/cardSale2Details.html">Second news card</a></li>
-            <li><a href="../static/register.html"><img src="../static/images/account.png" height=""></a></li>
+            <li><a href="#">Home</a></li><!--con / lo prende gia in static-->
+            <li><a href="/cardDetail/cardSale1Details.html">First news card</a></li>
+            <li><a href="/cardDetail/cardSale2Details.html">Second news card</a></li>
+            <li><a href="/register.html"><img src="/images/account.png" height="" alt="registerPage"></a></li>
         </ul>
     </nav>
 
     <div class="mainContent">
         <!-- Card Announcements -->
         <div class="container">
-
-            <article class="cardAnnuncment" th:text="${card}">
-                <span></span>
-
-            </article>
-
+            $$cards
         </div>
 
 
@@ -40,6 +35,9 @@
         <aside>
             <h2>News</h2>
             <ul>
+                <li>
+                    #PP4 | Simple spring added!
+                </li>
                 <li>
                     #PP3 | Added register form with JS validation
                 </li>

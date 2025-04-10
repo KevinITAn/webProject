@@ -74,7 +74,7 @@ nav ul li a:hover {
 }
 
 /* Card Announcement */
-.cardAnnuncment {
+.card {
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -83,17 +83,21 @@ nav ul li a:hover {
     text-align: center;
     transition: transform 0.3s ease-in-out;
 }
+/*se nel DOM elemento vuoto allora non applica cardAnnuncmente*/
+.card:empty {
+    display: none;
+}
 
-.cardAnnuncment:hover {
+.card:hover {
     transform: translateY(-5px);
 }
 
-.cardAnnuncment h2 {
+.card h2 {
     font-size: 20px;
     color: #2c3e50;
 }
 
-.cardAnnuncment p {
+.card p {
     font-size: 14px;
     color: #555;
 }

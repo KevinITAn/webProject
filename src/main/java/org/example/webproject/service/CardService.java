@@ -7,14 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 @Service
 public class CardService {
 
     List<Card> cardList=new ArrayList<>();
-
-    public List<Card> getCardList(){
-        return cardList;
-    }
 
     public void saveCard(Card cardIn){
         cardList.add(cardIn);
