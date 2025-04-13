@@ -1,20 +1,22 @@
-
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.querySelector("form");
-    const inputs = document.querySelectorAll("input");//tutti input della pagina
+    const form = document.getElementById("registerForm");
+    const inputs = form.querySelectorAll("input");
 
     form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevenire l'invio del modulo
+
         let valid = true;
 
-        inputs.forEach(input => {//per tutti gli input
+        inputs.forEach(input => {
             const errorMessage = input.nextElementSibling;
             if (!errorMessage || !errorMessage.classList.contains("error-message")) {
                 return;
             }
 
-            errorMessage.textContent = "";
+            errorMessage.textContent = ""; // Resetta il messaggio di errore
             input.style.border = "2px solid #ccc"; // Reset del bordo
 
+            // Validazioni per il nome, cognome, username
             if (input.id === "firstName" || input.id === "lastName") {
                 if (input.value.trim() === "") {
                     valid = false;
@@ -38,8 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        if (!valid) {
-            event.preventDefault();
+        // Se il modulo è valido, invia i dati
+        if (valid) {
+            form.submit();
         }
     });
 

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Card</title>
+    <link rel="stylesheet" href="/style/form.css" media="screen">
+</head>
+
+<body>
+<!-- Header Menu -->
+<nav class="topNavContainer">
+    <ul>
+        <li><a href="/card/new">Sell card!</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/register"><img src="/images/account.png" alt="registerPage"></a></li>
+    </ul>
+</nav>
+
+<div class="mainContent">
+    <h1>Edit Card</h1>
+
+    <!-- Form to edit the card -->
+    <form th:action="@{/card/{id}/edit(id=${card.id})}" method="post">
+        <label for="name">Card Name:</label>
+        <input type="text" id="name" name="name" th:value="${card.name}" required>
+
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author"  th:value="${card.author}" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" th:text="${card.description}" required></textarea>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" th:value="${#dates.format(card.date, 'yyyy-MM-dd')}" required>
+
+        <label for="condition">Select Card Condition:</label>
+        <select name="condition" id="condition" required>
+            <option value="MINT">Mint</option>
+            <option value="NEAR_MINT">Near Mint</option>
+            <option value="LIGHTLY_PLAYED">Lightly Played</option>
+            <option value="MODERATELY_PLAYED">Moderately Played</option>
+            <option value="HEAVILY_PLAYED">Heavily Played</option>
+            <option value="DAMAGED">Damaged</option>
+        </select>
+
+        <label for="type">Select card type:</label>
+        <select name="type" id="type" required>
+            <option value="POKEMON">Pokemon</option>
+            <option value="MAGIC,">Magic</option>
+            <option value="YU_GI_OH">Yu-Gi-Oh</option>
+            <option value="SPORTS">sport</option>
+            <option value="OTHER">other</option>
+        </select>
+
+        <button type="submit">Update Card</button>
+    </form>
+</div>
+
+<footer>
+    <p>Copyleft CC-by 2025 by Kevin Croce</p>
+</footer>
+</body>
+
+</html>

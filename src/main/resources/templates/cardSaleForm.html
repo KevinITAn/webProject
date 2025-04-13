@@ -19,9 +19,7 @@
         <ul>
             <li><a href="#">Sell card!</a></li>
             <li><a href="/">Home</a></li>
-            <li><a href="/cardDetail/cardSale1Details.html">First news card</a></li>
-            <li><a href="/cardDetail/cardSale2Details.html">Second news card</a></li>
-            <li><a href="/register.html"><img src="/images/account.png" height=""></a></li>
+            <li><a href="/register"><img src="/images/account.png" alt="registerPage"></a></li>
         </ul>
     </nav>
 
@@ -54,6 +52,15 @@
                 <option value="MODERATELY_PLAYED">Moderately Played</option>
                 <option value="HEAVILY_PLAYED">Heavily Played</option>
                 <option value="DAMAGED">Damaged</option>
+            </select>
+
+            <label for="type">Select card type:</label>
+            <select name="type" id="type" required>
+                <option value="POKEMON">Pokemon</option>
+                <option value="MAGIC,">Magic</option>
+                <option value="YU_GI_OH">Yu-Gi-Oh</option>
+                <option value="SPORTS">sport</option>
+                <option value="OTHER">other</option>
             </select>
             <br><br>
 

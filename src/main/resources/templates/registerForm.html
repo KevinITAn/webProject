@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>The Best Card Dealer!</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Card dealer site">
+    <meta name="author" content="Kevin Croce">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+    <link rel="stylesheet" href="/style/register.css">
+</head>
+
+<body>
+
+<!-- Header Menu -->
+<nav class="topNavContainer">
+    <ul>
+        <li><a href="/card/new">Sell card!</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="#"><img src="/images/account.png" height=""></a></li>
+    </ul>
+</nav>
+
+<!-- Form di vendita carta -->
+<div class="formContainer">
+    <h2>Register</h2>
+    <form id="registerForm" method="POST" enctype="multipart/form-data">
+
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" placeholder="Inserisci il tuo nome" required>
+        <span class="error-message"></span>
+        <br><br>
+
+        <label for="lastName">Last name:</label>
+        <input type="text" id="lastName" placeholder="Inserisci il tuo cognome" required>
+        <span class="error-message"></span>
+        <br><br>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Inserisci il tuo username" required>
+        <span class="error-message"></span>
+        <br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Inserisci password" required>
+        <span class="error-message"></span>
+        <br><br>
+
+        <label for="passwordConfirm">Password Confirm:</label>
+        <input type="password" id="passwordConfirm" placeholder="Inserice conferma password" required>
+        <span class="error-message"></span>
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>Copyleft CC-by 2025 by Kevin Croce</p>
+</footer>
+
+<script src="/script/register.js"></script>
+</body>
+
+</html>

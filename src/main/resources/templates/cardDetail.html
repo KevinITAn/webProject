@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="'Details of ' + ${card.name}">Card details</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="card details">
+    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
+    <link rel="stylesheet" href="/style/cardDetail.css" media="screen">
+</head>
+
+<body>
+
+<!-- Header Menu -->
+<nav class="topNavContainer">
+    <ul>
+        <li><a href="/card/new">Sell card!</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/register"><img src="/images/account.png" alt="registerPage"></a></li>
+    </ul>
+</nav>
+
+<!-- Card Details -->
+<header>
+    <h1 th:text="${card.name}">Card Name</h1>
+    <p th:text="${card.name} + ' details'">Card details</p>
+</header>
+
+<main>
+    <section class="card-announcement">
+        <h2>Card for Sale</h2>
+        <p><strong>Author:</strong> <span th:text="${card.author}">Author Name</span></p>
+        <p><strong>Date:</strong> <span th:text="${#dates.format(card.date, 'dd MMMM yyyy')}">March 5, 2025</span></p>
+        <p><strong>Condition:</strong> <span th:text="${card.condition}">Near-Mint</span></p>
+        <p><strong>Type:</strong> <span th:text="${card.type}">POKEMON</span></p>
+        <p><strong>Description:</strong> <span th:text="${card.description}">Card description here</span></p>
+        <img th:src="@{'/images/' + ${card.name} + '.jpg'}" alt="Card image">
+
+        <!-- Button to Edit the card -->
+        <div class="actionButton">
+            <a th:href="@{'/card/' + ${card.id} + '/edit'}">
+                <button>Edit Card</button>
+            </a>
+
+            <!-- Button to Delete the card -->
+            <a th:href="@{'/card/' + ${card.id} + '/delete'}">
+                <button>Delete Card</button>
+            </a>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer>
+    <p>Copyleft CC-by 2025 by Kevin Croce</p>
+</footer>
+
+</body>
+</html>

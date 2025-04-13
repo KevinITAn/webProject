@@ -4,61 +4,52 @@
 <head>
     <title>The best card dealer!</title>
     <meta charset="UTF-8">
-    <meta name="description" content="card dealer site">
-    <meta name="author" content="Kevin Croce">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="icon" href="/images/logo.jpg" type="image/icon type">
     <link rel="stylesheet" href="/style/main.css" media="screen">
 </head>
 
 <body>
-    <!-- Header Menu -->
-    <nav class="topNavContainer">
-        <ul>
-            <li><a href="/card/new">Sell card!</a></li>
-            <li><a href="#">Home</a></li><!--con / lo prende gia in static-->
-            <li><a href="/cardDetail/cardSale1Details.html">First news card</a></li>
-            <li><a href="/cardDetail/cardSale2Details.html">Second news card</a></li>
-            <li><a href="/register.html"><img src="/images/account.png" height="" alt="registerPage"></a></li>
-        </ul>
-    </nav>
+<!-- Header Menu -->
+<nav class="topNavContainer">
+    <ul>
+        <li><a href="/card/new">Sell card!</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/register"><img src="/images/account.png" alt="registerPage"></a></li>
+    </ul>
+</nav>
 
-    <div class="mainContent">
-        <!-- Card Announcements -->
-        <div class="container">
-            $$cards
+<div class="mainContent">
+    <!-- Card Announcements -->
+    <div class="container">
+        <!-- Itera su ogni card -->
+        <div th:each="card : ${cards}" class="card">
+            <a th:href="@{/card/{id}(id=${card.id})}">
+                <h3 th:text="${card.name}"></h3>
+            </a>
+            <p th:text="${card.description}"></p>
+            <p><strong>Author:</strong> <span th:text="${card.author}"></span></p>
+            <p><strong>Condition:</strong> <span th:text="${card.condition}"></span></p>
+            <p><strong>Type:</strong> <span th:text="${card.type}"></span></p>
+            <p><strong>Date:</strong> <span th:text="${#dates.format(card.date, 'yyyy-MM-dd')}"></span></p>
         </div>
-
-
-        <!-- Sidebar -->
-        <aside>
-            <h2>News</h2>
-            <ul>
-                <li>
-                    #PP4 | Simple spring added!
-                </li>
-                <li>
-                    #PP3 | Added register form with JS validation
-                </li>
-                <li>
-                    #PP2 | New version of the platform with CSS
-                </li>
-                <li>
-                    #PP1 | First version online!
-                </li>
-            </ul>
-        </aside>
-
     </div>
 
+    <!-- Sidebar -->
+    <aside>
+        <h2>News</h2>
+        <ul>
+            <li>#PP4 | Simple spring added!</li>
+            <li>#PP3 | Added register form with JS validation</li>
+            <li>#PP2 | New version of the platform with CSS</li>
+            <li>#PP1 | First version online!</li>
+        </ul>
+    </aside>
+</div>
 
-
-    <!--footer-->
-
-    <footer>
-        <small>Copyleft CC-by 2025 by Kevin Croce</small>
-    </footer>
+<!-- Footer -->
+<footer>
+    <small>Copyleft CC-by 2025 by Kevin Croce</small>
+</footer>
 
 </body>
 
