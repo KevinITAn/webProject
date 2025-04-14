@@ -38,14 +38,8 @@
 
         <!-- Button to Edit the card -->
         <div class="actionButton">
-            <a th:href="@{'/card/' + ${card.id} + '/edit'}">
-                <button>Edit Card</button>
-            </a>
-
-            <!-- Button to Delete the card -->
-            <a th:href="@{'/card/' + ${card.id} + '/delete'}">
-                <button>Delete Card</button>
-            </a>
+            <a th:href="@{'/card/' + ${card.id} + '/edit'}">Edit Card</a>
+            <a th:href="@{'/card/' + ${card.id} + '/delete'}">Delete Card</a>
         </div>
     </section>
 </main>
