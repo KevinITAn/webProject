@@ -36,8 +36,8 @@
         <p><strong>Description:</strong> <span th:text="${card.description}">Card description here</span></p>
         <img th:src="@{'/images/' + ${card.name} + '.jpg'}" alt="Card image">
 
-        <!-- Button to Edit the card -->
-        <div class="actionButton">
+        <!-- a to Edit/Delete the card -->
+        <div class="actionLink">
             <a th:href="@{'/card/' + ${card.id} + '/edit'}">Edit Card</a>
             <a th:href="@{'/card/' + ${card.id} + '/delete'}">Delete Card</a>
         </div>

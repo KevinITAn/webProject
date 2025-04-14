@@ -12,10 +12,8 @@ import java.util.List;
 public class CardService {
 
     private final List<Card> cardList=new ArrayList<>();
+    private Integer newId=0;//serve per tenere traccia del attuale id da dare
 
-    public int newId(){
-         return cardList.size();
-    }
     //problem many card
     public Card getCardById(int id){
         for(Card c:cardList)
@@ -39,7 +37,8 @@ public class CardService {
 
     public void saveCard(Card cardIn){
         //devo prima mettere id
-        cardIn.setId(newId());
+        cardIn.setId(newId);
+        newId++;//per renderlo valido al prossimo save
         cardList.add(cardIn);
     }
 

@@ -64,6 +64,7 @@ public class MainController {
     @PostMapping("/card/new")
     public String createCard(@ModelAttribute Card card) {
         cardService.saveCard(card);
+        System.out.println(cardService.getCardList());
         return "redirect:/";
     }
 

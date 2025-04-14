@@ -14,6 +14,7 @@ body {
 
 /* Header e Footer (Stile Uniforme) */
 .topNavContainer {
+    border-radius: 22px;
     background: #2c3e50;
     padding: 15px 0;
     text-align: center;

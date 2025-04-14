@@ -6,8 +6,13 @@
     font-family: Arial, sans-serif;
 }
 
+html,body,main{
+    height: 100%;
+}
+
 /* Navigation */
 .topNavContainer {
+    border-radius: 22px;
     margin: 2%;
     background: #2c3e50;
     padding: 15px 0;
@@ -91,7 +96,10 @@ header p {
 }
 
 /* Stile per i bottoni con la classe actionButton (modifica ed elimina) */
-.actionButton button {
+.actionLink{
+    margin: 25px;
+}
+.actionLink a{
     background-color: #3498db;
     color: white;
     border: none;
@@ -100,22 +108,21 @@ header p {
     margin: 10px;
     cursor: pointer;
     font-size: 1.1em;
-    transition: background-color 0.3s ease-in-out;
 }
 
-.actionButton:hover button {
+.actionLink:hover a {
     background-color: #2980b9;
 }
 
-.actionButton:focus button {
+.actionLink:focus a {
     outline: none;
 }
 
-.actionButton.delete button {
+.actionLink.delete a {
     background-color: #e74c3c;
 }
 
-.actionButton.delete:hover button{
+.actionLink.delete:hover a{
     background-color: #c0392b;
 }
 
