@@ -5,17 +5,12 @@
     <meta charset="UTF-8">
     <title>Edit Card</title>
     <link rel="stylesheet" href="/style/form.css" media="screen">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 </head>
 
 <body>
 <!-- Header Menu -->
-<nav class="topNavContainer">
-    <ul>
-        <li><a href="/card/new">Sell card!</a></li>
-        <li><a href="/">Home</a></li>
-        <li><a href="/register"><img src="/images/account.png" alt="registerPage"></a></li>
-    </ul>
-</nav>
+<div th:replace="fragment/navBar :: navBarFragment"></div>
 
 <div class="formContainer">
     <h1>Edit Card</h1>
@@ -34,8 +29,8 @@
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" th:value="${#dates.format(card.date, 'yyyy-MM-dd')}" required>
 
-        <label for="condition">Select Card Condition:</label>
-        <select name="condition" id="condition" required>
+        <label for="cardCondition">Select Card Condition:</label>
+        <select name="condition" id="cardCondition" required>
             <option value="MINT">Mint</option>
             <option value="NEAR_MINT">Near Mint</option>
             <option value="LIGHTLY_PLAYED">Lightly Played</option>
@@ -56,10 +51,7 @@
         <button type="submit">Update Card</button>
     </form>
 </div>
-
-<footer>
-    <p>Copyleft CC-by 2025 by Kevin Croce</p>
-</footer>
+<div th:replace="fragment/footer :: footerFragment"></div>
 </body>
 
 </html>

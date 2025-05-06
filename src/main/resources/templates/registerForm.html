@@ -9,60 +9,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" href="/images/logo.jpg" type="image/icon type">
-    <link rel="stylesheet" href="/style/register.css">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 </head>
 
 <body>
 
 <!-- Header Menu -->
-<nav class="topNavContainer">
-    <ul>
-        <li><a href="/card/new">Sell card!</a></li>
-        <li><a href="/">Home</a></li>
-        <li><a href="#"><img src="/images/account.png" height=""></a></li>
-    </ul>
-</nav>
+<div th:replace="fragment/navBar :: navBarFragment"></div>
 
-<!-- Form di vendita carta -->
-<div class="formContainer">
-    <h2>Register</h2>
-    <form id="registerForm" method="POST" enctype="multipart/form-data">
+<!-- Form di register -->
+<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; border-radius: 1rem;">
+        <h3 class="text-center mb-4">Registrati</h3>
+        <form id="registerForm" method="POST" enctype="multipart/form-data">
 
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" placeholder="Insert name:" required>
-        <span class="error-message"></span>
-        <br><br>
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First name:</label>
+                <input type="text" id="firstName" class="form-control" placeholder="Mario">
+                <div class="error-message text-danger small" id="firstName-error"></div>
+            </div>
 
-        <label for="lastName">Last name:</label>
-        <input type="text" id="lastName" placeholder="Insert surname:" required>
-        <span class="error-message"></span>
-        <br><br>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last name:</label>
+                <input type="text" id="lastName" class="form-control" placeholder="Rossi">
+                <div class="error-message text-danger small" id="lastName-error"></div>
+            </div>
 
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Insert username:" required>
-        <span class="error-message"></span>
-        <br><br>
+            <div class="mb-3">
+                <label for="userName" class="form-label">Username:</label>
+                <input type="text" id="userName" class="form-control" placeholder="SuperMario">
+                <div class="error-message text-danger small" id="userName-error"></div>
+            </div>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Insert password:" required>
-        <span class="error-message"></span>
-        <br><br>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input id="password" type="password" class="form-control" placeholder="********">
+                <div class="error-message text-danger small" id="password-error"></div>
+            </div>
 
-        <label for="passwordConfirm">Password Confirm:</label>
-        <input type="password" id="passwordConfirm" placeholder="Insert confirm password:" required>
-        <span class="error-message"></span>
-        <br><br>
+            <div class="mb-3">
+                <label for="passwordConfirm" class="form-label">Conferma password</label>
+                <input id="passwordConfirm" type="password" class="form-control" placeholder="********">
+                <div class="error-message text-danger small" id="passwordConfirm-error"></div>
+            </div>
 
-        <button type="submit">Submit</button>
-    </form>
+            <button type="submit" class="btn btn-primary w-100">Crea account</button>
+        </form>
+    </div>
 </div>
 
 <!-- Footer -->
-<footer>
-    <p>Copyleft CC-by 2025 by Kevin Croce</p>
-</footer>
+<div th:replace="fragment/footer :: footerFragment"></div>
 
 <script src="/script/register.js"></script>
 </body>
-
 </html>

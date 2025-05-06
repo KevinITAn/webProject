@@ -1,23 +1,33 @@
 package org.example.webproject.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Getter @Setter @AllArgsConstructor @ToString
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Entity
 public class Card {
-    private Integer id;//baiding ok perchè puo essere null
+
+    @Id
+    @GeneratedValue
+    private Integer id;
+
     private String name;
     private String description;
     private String author;
-    private CardCondition condition;
+
+    @Enumerated(EnumType.STRING)
+    private CardCondition cardCondition;//codition non posso usarlo perchè da errore
+
+    @Enumerated(EnumType.STRING)
     private CardType type;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-
 }

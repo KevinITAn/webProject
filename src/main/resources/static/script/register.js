@@ -1,54 +1,58 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("registerForm");
-    const inputs = form.querySelectorAll("input");
 
     form.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevenire l'invio del modulo
+        event.preventDefault();
 
         let valid = true;
 
-        inputs.forEach(input => {
-            const errorMessage = input.nextElementSibling;
-            if (!errorMessage || !errorMessage.classList.contains("error-message")) {
-                return;
-            }
+        // Pulizia errori
+        document.querySelectorAll(".error-message").forEach(el => el.textContent = "");
+        document.querySelectorAll("input").forEach(input => input.style.border = "2px solid #ccc");
 
-            errorMessage.textContent = ""; // Resetta il messaggio di errore
-            input.style.border = "2px solid #ccc"; // Reset del bordo
+        const firstName = document.getElementById("firstName");
+        const lastName = document.getElementById("lastName");
+        const userName = document.getElementById("userName");
+        const password = document.getElementById("password");
+        const passwordConfirm = document.getElementById("passwordConfirm");
 
-            // Validazioni per il nome, cognome, username
-            if (input.id === "firstName" || input.id === "lastName") {
-                if (input.value.trim() === "") {
-                    valid = false;
-                    showError(input, "Il campo non può essere vuoto.");
-                }
-            }
+        // Validazioni
+        if (firstName.value.trim() === "") {
+            showError("firstName", "Il campo non può essere vuoto.");
+            valid = false;
+        }
 
-            if (input.id === "username" && input.value.length < 5) {
-                valid = false;
-                showError(input, "Lo username deve essere almeno di 5 caratteri.");
-            }
+        if (lastName.value.trim() === "") {
+            showError("lastName", "Il campo non può essere vuoto.");
+            valid = false;
+        }
 
-            if (input.id === "password" && input.value.length < 8) {
-                valid = false;
-                showError(input, "La password deve essere almeno di 8 caratteri.");
-            }
+        if (userName.value.length < 5) {
+            showError("userName", "Lo username deve essere almeno di 5 caratteri.");
+            valid = false;
+        }
 
-            if (input.id === "passwordConfirm" && input.value !== document.getElementById("password").value) {
-                valid = false;
-                showError(input, "Le password non coincidono.");
-            }
-        });
+        if (password.value.length < 8) {
+            showError("password", "La password deve essere almeno di 8 caratteri.");
+            valid = false;
+        }
 
-        // Se il modulo è valido, invia i dati
+        if (passwordConfirm.value !== password.value) {
+            showError("passwordConfirm", "Le password non coincidono.");
+            valid = false;
+        }
+
         if (valid) {
-            form.submit();
+            form.submit(); // oppure usare fetch()
         }
     });
 
-    function showError(input, message) {
-        const errorMessage = input.nextElementSibling;
-        errorMessage.textContent = message;
+    function showError(inputId, message) {
+        const input = document.getElementById(inputId);
+        const errorDiv = document.getElementById(`${inputId}-error`);
         input.style.border = "2px solid red";
+        if (errorDiv) {
+            errorDiv.textContent = message;
+        }
     }
 });

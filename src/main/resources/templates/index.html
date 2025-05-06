@@ -1,53 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" style="height: 100%">
 
 <head>
     <title>The best card dealer!</title>
     <meta charset="UTF-8">
     <link rel="icon" href="/images/logo.jpg" type="image/icon type">
-    <link rel="stylesheet" href="/style/main.css" media="screen">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 </head>
 
-<body>
+<body style="height: 100%">
+
 <!-- Header Menu -->
-<nav class="topNavContainer">
-    <ul>
-        <li><a href="/card/new">Sell card!</a></li>
-        <li><a href="/">Home</a></li>
-        <li><a href="/register"><img src="/images/account.png" alt="registerPage"></a></li>
-    </ul>
-</nav>
+<div th:replace="fragment/navBar :: navBarFragment"></div>
 
-<div class="mainContent">
-    <!-- Card Announcements -->
-    <div class="container">
-        <!-- Itera su ogni card -->
-        <div th:each="card : ${cards}" class="card">
-            <a th:href="@{/card/{id}(id=${card.id})}">
-                <h3 th:text="${card.name}"></h3>
-            </a>
-            <p th:text="${card.description}"></p>
-            <p><strong>Author:</strong> <span th:text="${card.author}"></span></p>
-            <p><strong>Condition:</strong> <span th:text="${card.condition}"></span></p>
-            <p><strong>Type:</strong> <span th:text="${card.type}"></span></p>
-            <p><strong>Date:</strong> <span th:text="${#dates.format(card.date, 'yyyy-MM-dd')}"></span></p>
+<div class="container mt-4" style="height: 100%">
+    <div class="row">
+        <!-- Cards Section -->
+        <div class="col-12 col-md-9 mb-4">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div th:each="card : ${cards}" class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <a th:href="@{/card/{id}(id=${card.id})}">
+                                <h5 class="card-title" th:text="${card.name}"></h5>
+                            </a>
+                            <p class="card-header" th:text="'Author: ' + ${card.author}"></p>
+                            <p class="card-header" th:text="'Condition: ' + ${card.cardCondition}"></p>
+                            <p class="card-header" th:text="'Description: ' + ${card.description}"></p>
+                            <p class="card-header" th:text="'Date of publish: ' + ${#dates.format(card.date, 'yyyy-MM-dd')}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- Sidebar -->
-    <aside>
-        <h2>News</h2>
-        <ul>
-            <li>#PP4 | Simple spring added!</li>
-            <li>#PP3 | Added register form with JS validation</li>
-            <li>#PP2 | New version of the platform with CSS</li>
-            <li>#PP1 | First version online!</li>
-        </ul>
-    </aside>
+        <!-- Sidebar Section -->
+        <div class="col-12 col-md-3">
+            <aside class="p-3 border rounded bg-light">
+                <h4>News</h4>
+                <ul class="list-unstyled">
+                    <li>#PP4 | Simple spring added!</li>
+                    <li>#PP3 | Added register form with JS validation</li>
+                    <li>#PP2 | New version of the platform with CSS</li>
+                    <li>#PP1 | First version online!</li>
+                </ul>
+            </aside>
+        </div>
+
+    </div>
 </div>
+
+
 <!-- Footer -->
-<footer>
-    <small>Copyleft CC-by 2025 by Kevin Croce</small>
-</footer>
+<div th:replace="fragment/footer :: footerFragment"></div>
+
 </body>
 </html>

@@ -6,19 +6,12 @@
     <meta charset="UTF-8">
     <meta name="description" content="card details">
     <link rel="icon" href="/images/logo.jpg" type="image/icon type">
-    <link rel="stylesheet" href="/style/cardDetail.css" media="screen">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 </head>
 
 <body>
-
 <!-- Header Menu -->
-<nav class="topNavContainer">
-    <ul>
-        <li><a href="/card/new">Sell card!</a></li>
-        <li><a href="/">Home</a></li>
-        <li><a href="/register"><img src="/images/account.png" alt="registerPage"></a></li>
-    </ul>
-</nav>
+<div th:replace="fragment/navBar :: navBarFragment"></div>
 
 <!-- Card Details -->
 <header>
@@ -29,12 +22,11 @@
 <main>
     <section class="card-announcement">
         <h2>Card for Sale</h2>
-        <p><strong>Author:</strong> <span th:text="${card.author}">Author Name</span></p>
-        <p><strong>Date:</strong> <span th:text="${#dates.format(card.date, 'dd MMMM yyyy')}">March 5, 2025</span></p>
-        <p><strong>Condition:</strong> <span th:text="${card.condition}">Near-Mint</span></p>
-        <p><strong>Type:</strong> <span th:text="${card.type}">POKEMON</span></p>
-        <p><strong>Description:</strong> <span th:text="${card.description}">Card description here</span></p>
-        <img th:src="@{'/images/' + ${card.name} + '.jpg'}" alt="Card image">
+        <p><strong>Author:</strong> <span th:text="${card.author}"></span></p>
+        <p><strong>Date:</strong> <span th:text="${#dates.format(card.date, 'dd MMMM yyyy')}"></span></p>
+        <p><strong>Condition:</strong> <span th:text="${card.cardCondition}"></span></p>
+        <p><strong>Type:</strong> <span th:text="${card.type}"></span></p>
+        <p><strong>Description:</strong> <span th:text="${card.description}"></span></p>
 
         <!-- a to Edit/Delete the card -->
         <div class="actionLink">
