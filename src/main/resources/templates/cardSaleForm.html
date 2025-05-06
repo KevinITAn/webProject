@@ -45,7 +45,7 @@
 
             <div class="mb-3">
                 <label for="cardCondition">Select Card Condition:</label>
-                <select name="condition" id="cardCondition" required>
+                <select name="cardCondition" id="cardCondition" required>
                     <option value="MINT">Mint</option>
                     <option value="NEAR_MINT">Near Mint</option>
                     <option value="LIGHTLY_PLAYED">Lightly Played</option>
@@ -64,6 +64,11 @@
                     <option value="SPORTS">sport</option>
                     <option value="OTHER">other</option>
                 </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="img">Upload Image:</label>
+                <input type="file" id="img" name="img" accept="image/*" required>
             </div>
 
             <button type="submit" class="btn btn-primary w-100">Sale the card</button>

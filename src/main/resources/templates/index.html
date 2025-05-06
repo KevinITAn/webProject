@@ -20,6 +20,9 @@
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                 <div th:each="card : ${cards}" class="col">
                     <div class="card h-100">
+
+                        <img th:src="'data:image/jpeg;base64,' + ${card.base64Img()}" class="card-img-top" alt="card img">
+
                         <div class="card-body">
                             <a th:href="@{/card/{id}(id=${card.id})}">
                                 <h5 class="card-title" th:text="${card.name}"></h5>
@@ -28,6 +31,8 @@
                             <p class="card-header" th:text="'Condition: ' + ${card.cardCondition}"></p>
                             <p class="card-header" th:text="'Description: ' + ${card.description}"></p>
                             <p class="card-header" th:text="'Date of publish: ' + ${#dates.format(card.date, 'yyyy-MM-dd')}"></p>
+
+                            <p th:text="${card.img}"></p>
                         </div>
                     </div>
                 </div>

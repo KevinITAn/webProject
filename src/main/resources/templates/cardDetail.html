@@ -22,6 +22,7 @@
 <main>
     <section class="card-announcement">
         <h2>Card for Sale</h2>
+        <img th:src="'data:image/jpeg;base64,' + ${card.base64Img()}" class="card-img-top" alt="card img">
         <p><strong>Author:</strong> <span th:text="${card.author}"></span></p>
         <p><strong>Date:</strong> <span th:text="${#dates.format(card.date, 'dd MMMM yyyy')}"></span></p>
         <p><strong>Condition:</strong> <span th:text="${card.cardCondition}"></span></p>
