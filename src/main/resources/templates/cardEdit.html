@@ -1,57 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<head>
-    <meta charset="UTF-8">
-    <title>Edit Card</title>
-    <link rel="stylesheet" href="/style/form.css" media="screen">
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
-</head>
+<head th:replace="fragment/head :: headFragment('Edit card')"></head>
 
 <body>
-<!-- Header Menu -->
-<div th:replace="fragment/navBar :: navBarFragment"></div>
+    <!-- Header Menu -->
+    <div th:replace="fragment/navBar :: navBarFragment"></div>
+    <!-- Form di modifica carta tramite il fragment -->
+    <div th:replace="fragment/cardForm :: formFragment(${actionUrl}, ${card})"></div>
 
-<div class="formContainer">
-    <h1>Edit Card</h1>
-
-    <!-- Form to edit the card -->
-    <form th:action="@{/card/{id}/edit(id=${card.id})}" method="post">
-        <label for="name">Card Name:</label>
-        <input type="text" id="name" name="name" th:value="${card.name}" required>
-
-        <label for="author">Author:</label>
-        <input type="text" id="author" name="author"  th:value="${card.author}" required>
-
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" th:text="${card.description}" required></textarea>
-
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" th:value="${#dates.format(card.date, 'yyyy-MM-dd')}" required>
-
-        <label for="cardCondition">Select Card Condition:</label>
-        <select name="condition" id="cardCondition" required>
-            <option value="MINT">Mint</option>
-            <option value="NEAR_MINT">Near Mint</option>
-            <option value="LIGHTLY_PLAYED">Lightly Played</option>
-            <option value="MODERATELY_PLAYED">Moderately Played</option>
-            <option value="HEAVILY_PLAYED">Heavily Played</option>
-            <option value="DAMAGED">Damaged</option>
-        </select>
-
-        <label for="type">Select card type:</label>
-        <select name="type" id="type" required>
-            <option value="POKEMON">Pokemon</option>
-            <option value="MAGIC,">Magic</option>
-            <option value="YU_GI_OH">Yu-Gi-Oh</option>
-            <option value="SPORTS">sport</option>
-            <option value="OTHER">other</option>
-        </select>
-
-        <button type="submit">Update Card</button>
-    </form>
-</div>
-<div th:replace="fragment/footer :: footerFragment"></div>
 </body>
 
 </html>

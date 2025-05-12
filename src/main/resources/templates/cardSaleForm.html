@@ -1,84 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <title>The Best Card Dealer!</title>
-    <meta charset="UTF-8">
-    <meta name="description" content="Card dealer site">
-    <meta name="author" content="Kevin Croce">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
-</head>
+<head th:replace="fragment/head :: headFragment('Sale card')"></head>
 
 <body>
 
-<!-- Header Menu -->
-<div th:replace="fragment/navBar :: navBarFragment"></div>
+    <!-- Header Menu -->
+    <div th:replace="fragment/navBar :: navBarFragment"></div>
 
     <!-- Form di vendita carta -->
-<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
-    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; border-radius: 1rem;">
-        <h3 class="text-center mb-4">Sale</h3>
-        <form method="POST" enctype="multipart/form-data" action="/card/new">
-
-        <div class="mb-3">
-                <label for="name">Card Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" rows="3" required></textarea>
-            </div>
-
-            <div class="mb-3">
-                <label for="date">Announcement Date:</label>
-                <input id="date" type="date" name="date" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="author">Author:</label>
-                <input type="text" id="author" name="author" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="cardCondition">Select Card Condition:</label>
-                <select name="cardCondition" id="cardCondition" required>
-                    <option value="MINT">Mint</option>
-                    <option value="NEAR_MINT">Near Mint</option>
-                    <option value="LIGHTLY_PLAYED">Lightly Played</option>
-                    <option value="MODERATELY_PLAYED">Moderately Played</option>
-                    <option value="HEAVILY_PLAYED">Heavily Played</option>
-                    <option value="DAMAGED">Damaged</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="type">Select card type:</label>
-                <select name="type" id="type" required>
-                    <option value="POKEMON">Pokemon</option>
-                    <option value="MAGIC">Magic</option>
-                    <option value="YU_GI_OH">Yu-Gi-Oh</option>
-                    <option value="SPORTS">sport</option>
-                    <option value="OTHER">other</option>
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="img">Upload Image:</label>
-                <input type="file" id="img" name="img" accept="image/*" required>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">Sale the card</button>
-        </form>
-    </div>
-</div>
-
+    <div th:replace="fragment/cardForm :: formFragment(${actionUrl}, ${card})"></div>
 
     <!-- Footer -->
-<div th:replace="fragment/footer :: footerFragment"></div>
+    <div th:replace="fragment/footer :: footerFragment"></div>
 
 </body>
 

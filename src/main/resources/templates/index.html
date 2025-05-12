@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="height: 100%">
 
-<head>
-    <title>The best card dealer!</title>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/images/logo.jpg" type="image/icon type">
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
-</head>
+<head th:replace="fragment/head :: headFragment('The best card dealer!')"></head>
 
 <body style="height: 100%">
 
@@ -31,8 +26,6 @@
                             <p class="card-header" th:text="'Condition: ' + ${card.cardCondition}"></p>
                             <p class="card-header" th:text="'Description: ' + ${card.description}"></p>
                             <p class="card-header" th:text="'Date of publish: ' + ${#dates.format(card.date, 'yyyy-MM-dd')}"></p>
-
-                            <p th:text="${card.img}"></p>
                         </div>
                     </div>
                 </div>

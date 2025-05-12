@@ -32,6 +32,8 @@ public class MainController {
     @GetMapping("/")
     public String getHomePage(Model model) {
         List<Card> cardList=cardService.getCardList();
+        for(Card src : cardList)
+            System.out.println(src.getName());
         model.addAttribute("cards",cardList);
         return "index";
     }
@@ -39,23 +41,26 @@ public class MainController {
     public String getCard(@PathVariable("id") int id, Model model){
         Card card = cardService.getCardById(id);
         if (card == null) {
-            return "redirect:/";
+            return "redirect:/notFoundCard";
         }
         model.addAttribute("card", card);
         return "cardDetail";
     }
 
-    @GetMapping("/card/new")
+    @GetMapping("card/new")
     public String newCard(Model model) {
+        model.addAttribute("card", new Card());
+        model.addAttribute("actionUrl", "/card/new");
         return "cardSaleForm";
     }
 
     @GetMapping("/card/{id}/edit")
     public String editCard(@PathVariable int id, Model model) {
         Card card = cardService.getCardById(id);
-        if(card==null)
-            return "redirect:/";
+        if (card == null)
+            return "redirect:/notFoundCard";
         model.addAttribute("card", card);
+        model.addAttribute("actionUrl", "/card/" + id + "/edit");
         return "cardEdit";
     }
 
@@ -67,15 +72,24 @@ public class MainController {
 
     @GetMapping("/register")
     public String registerForm(Model model) {
-        model.addAttribute("user", new User());
         return "registerForm";
     }
 
+
     @PostMapping("/card/{id}/edit")
-    public String updateCard(@PathVariable int id, @ModelAttribute Card card) {
-        cardService.updateCard(card);
+    public String updateCard(@PathVariable int id,
+                             @RequestParam("name") String name,
+                             @RequestParam("description") String description,
+                             @RequestParam("author") String author,
+                             @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+                             @RequestParam("cardCondition") CardCondition cardCondition,
+                             @RequestParam("type") CardType type,
+                             @RequestParam(value = "img", required = false) MultipartFile imgFile) throws IOException {
+        //aggiorna i dati
+        cardService.updateCard(id,name,description,author,date,cardCondition,type,imgFile);
         return "redirect:/";
     }
+
 
     @PostMapping("/card/new")
     public String createCard(@RequestParam("name") String name,
@@ -102,12 +116,6 @@ public class MainController {
     @PostMapping("/register")
     public String handleRegister(@ModelAttribute User user) {
         return "redirect:/";
-    }
-
-    @PostMapping("/api/card/new")
-    public ResponseEntity<Card> createCardAPI(@RequestBody Card card) {
-        cardService.saveCard(card);
-        return new ResponseEntity<>(card, HttpStatus.CREATED);//201 HttpStatus.CREATED
     }
 
 }

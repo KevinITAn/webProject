@@ -1,0 +1,67 @@
+<!-- formFragment.html -->
+<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-light" th:fragment="formFragment(actionUrl, card)">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; border-radius: 1rem;">
+        <h3 class="text-center mb-4" th:text="${#strings.contains(actionUrl, 'edit')} ? 'Edit Card' : 'Sell Card'"></h3>
+
+        <form th:action="${actionUrl}" method="POST" enctype="multipart/form-data" th:object="${card}">
+
+        <!-- Card Name -->
+            <div class="mb-3">
+                <label for="name">Card Name:</label>
+                <input type="text" id="name" th:field="*{name}" class="form-control" required>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label for="description">Description:</label>
+                <textarea id="description" th:field="*{description}" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <!-- Announcement Date -->
+            <div class="mb-3">
+                <label for="date">Announcement Date:</label>
+                <input type="date" id="date" th:field="*{date}" class="form-control" required>
+            </div>
+
+            <!-- Author -->
+            <div class="mb-3">
+                <label for="author">Author:</label>
+                <input type="text" id="author" th:field="*{author}" class="form-control" required>
+            </div>
+
+            <!-- Card Condition -->
+            <div class="mb-3">
+                <label for="cardCondition">Card Condition:</label>
+                <select th:field="*{cardCondition}" class="form-control" required>
+                    <option th:value="MINT">Mint</option>
+                    <option th:value="NEAR_MINT">Near Mint</option>
+                    <option th:value="LIGHTLY_PLAYED">Lightly Played</option>
+                    <option th:value="MODERATELY_PLAYED">Moderately Played</option>
+                    <option th:value="HEAVILY_PLAYED">Heavily Played</option>
+                    <option th:value="DAMAGED">Damaged</option>
+                </select>
+            </div>
+
+            <!-- Card Type -->
+            <div class="mb-3">
+                <label for="type">Card Type:</label>
+                <select th:field="*{type}" class="form-control" required>
+                    <option th:value="POKEMON">Pokemon</option>
+                    <option th:value="MAGIC">Magic</option>
+                    <option th:value="YU_GI_OH">Yu-Gi-Oh</option>
+                    <option th:value="SPORTS">Sports</option>
+                    <option th:value="OTHER">Other</option>
+                </select>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label for="img">Upload Image:</label>
+                <input type="file" id="img" name="img" accept="image/*" class="form-control" th:if="${#strings.contains(actionUrl, 'new')}" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100" th:text="${#strings.contains(actionUrl, 'edit')} ? 'Update Card' : 'Sell the Card'"></button>
+        </form>
+    </div>
+</div>

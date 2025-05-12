@@ -2,10 +2,15 @@ package org.example.webproject.service;
 
 import lombok.Getter;
 import org.example.webproject.model.Card;
+import org.example.webproject.model.CardCondition;
+import org.example.webproject.model.CardType;
 import org.example.webproject.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -19,16 +24,21 @@ public class CardService {
         return repoCard.getReferenceById(id);
     }
 
-    public void updateCard(Card card){
-        Card cardRsc=getCardById(card.getId());
+    public void updateCard(int id,String name, String description, String author, Date date, CardCondition condition, CardType type, MultipartFile file) throws IOException {
+        Card cardRsc=getCardById(id);
         if(cardRsc==null)
             return;
-        cardRsc.setName(card.getName());
-        cardRsc.setDescription(card.getDescription());
-        cardRsc.setAuthor(card.getAuthor());
-        cardRsc.setCardCondition(card.getCardCondition());
-        cardRsc.setType(card.getType());
-        cardRsc.setDate(card.getDate());
+        //set new val
+        cardRsc.setName(name);
+        cardRsc.setDescription(description);
+        cardRsc.setAuthor(author);
+        cardRsc.setCardCondition(condition);
+        cardRsc.setType(type);
+        cardRsc.setDate(date);
+        if(file!=null)
+            cardRsc.setImg(file.getBytes());
+        //persisto le info
+        repoCard.save(cardRsc);
     }
 
     public List<Card> getCardList(){
