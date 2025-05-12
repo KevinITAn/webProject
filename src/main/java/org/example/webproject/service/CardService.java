@@ -1,5 +1,6 @@
 package org.example.webproject.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.Getter;
 import org.example.webproject.model.Card;
 import org.example.webproject.model.CardCondition;
@@ -21,7 +22,7 @@ public class CardService {
     private CardRepository repoCard;
 
     public Card getCardById(int id){
-        return repoCard.getReferenceById(id);
+        return repoCard.findById(id).orElse(null);
     }
 
     public void updateCard(int id,String name, String description, String author, Date date, CardCondition condition, CardType type, MultipartFile file) throws IOException {
@@ -52,5 +53,6 @@ public class CardService {
     public void deleteCard(int id){
         repoCard.deleteById(id);
     }
+
 
 }

@@ -40,9 +40,9 @@ public class MainController {
     @GetMapping("card/{id}")
     public String getCard(@PathVariable("id") int id, Model model){
         Card card = cardService.getCardById(id);
-        if (card == null) {
+        if (card == null)
             return "redirect:/notFoundCard";
-        }
+
         model.addAttribute("card", card);
         return "cardDetail";
     }
@@ -70,6 +70,11 @@ public class MainController {
         return "redirect:/";
     }
 
+    @GetMapping("/notFoundCard")
+    public String notFoundCard() {
+        return "notFoundCard";
+    }
+
     @GetMapping("/register")
     public String registerForm(Model model) {
         return "registerForm";
@@ -85,6 +90,10 @@ public class MainController {
                              @RequestParam("cardCondition") CardCondition cardCondition,
                              @RequestParam("type") CardType type,
                              @RequestParam(value = "img", required = false) MultipartFile imgFile) throws IOException {
+        //controllo se la carta esiste
+        if(cardService.getCardById(id)==null)
+            return "redirect: notFoundCard";
+
         //aggiorna i dati
         cardService.updateCard(id,name,description,author,date,cardCondition,type,imgFile);
         return "redirect:/";
