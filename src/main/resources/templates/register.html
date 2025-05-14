@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="it">
-
-<head th:replace="fragment/head :: headFragment('Register!')"></head>
-
+<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragment/head :: headFragment('Register!')"></div>
+</head>
 <body>
-
 <!-- Header Menu -->
 <div th:replace="fragment/navBar :: navBarFragment"></div>
 
@@ -12,35 +11,36 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
     <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; border-radius: 1rem;">
         <h3 class="text-center mb-4">Registrati</h3>
-        <form id="registerForm" method="POST" enctype="multipart/form-data">
+        <form id="registerForm" method="POST" th:action="@{/register}">
+            <!-- Token CSRF rimosso perché CSRF è disabilitato -->
 
             <div class="mb-3">
                 <label for="firstName" class="form-label">First name:</label>
-                <input type="text" id="firstName" class="form-control" placeholder="Mario">
-                <div class="error-message text-danger small" id="firstName-error"></div>
+                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Mario">
+                <div class="error-message text-danger small" th:text="${firstNameError}" id="firstName-error"></div>
             </div>
 
             <div class="mb-3">
                 <label for="lastName" class="form-label">Last name:</label>
-                <input type="text" id="lastName" class="form-control" placeholder="Rossi">
-                <div class="error-message text-danger small" id="lastName-error"></div>
+                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Rossi">
+                <div class="error-message text-danger small" th:text="${lastNameError}" id="lastName-error"></div>
             </div>
 
             <div class="mb-3">
                 <label for="userName" class="form-label">Username:</label>
-                <input type="text" id="userName" class="form-control" placeholder="SuperMario">
-                <div class="error-message text-danger small" id="userName-error"></div>
+                <input type="text" id="userName" name="username" class="form-control" placeholder="SuperMario">
+                <div class="error-message text-danger small" th:text="${usernameError}" id="userName-error"></div>
             </div>
 
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input id="password" type="password" class="form-control" placeholder="********">
-                <div class="error-message text-danger small" id="password-error"></div>
+                <input id="password" type="password" name="password" class="form-control" placeholder="********">
+                <div class="error-message text-danger small" th:text="${passwordError}" id="password-error"></div>
             </div>
 
             <div class="mb-3">
                 <label for="passwordConfirm" class="form-label">Conferma password</label>
-                <input id="passwordConfirm" type="password" class="form-control" placeholder="********">
+                <input id="passwordConfirm" type="password" name="passwordConfirm" class="form-control" placeholder="********">
                 <div class="error-message text-danger small" id="passwordConfirm-error"></div>
             </div>
 
@@ -53,5 +53,6 @@
 <div th:replace="fragment/footer :: footerFragment"></div>
 
 <script src="/script/register.js"></script>
+
 </body>
 </html>

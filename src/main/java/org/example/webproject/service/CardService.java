@@ -25,18 +25,17 @@ public class CardService {
         return repoCard.findById(id).orElse(null);
     }
 
-    public void updateCard(int id,String name, String description, String author, Date date, CardCondition condition, CardType type, MultipartFile file) throws IOException {
+    public void updateCard(int id,String name, String description, Date date, CardCondition condition, CardType type, MultipartFile file) throws IOException {
         Card cardRsc=getCardById(id);
         if(cardRsc==null)
             return;
         //set new val
         cardRsc.setName(name);
         cardRsc.setDescription(description);
-        cardRsc.setAuthor(author);
         cardRsc.setCardCondition(condition);
         cardRsc.setType(type);
         cardRsc.setDate(date);
-        if(file!=null)
+        if(!file.isEmpty())
             cardRsc.setImg(file.getBytes());
         //persisto le info
         repoCard.save(cardRsc);
@@ -50,8 +49,8 @@ public class CardService {
         repoCard.save(cardIn);
     }
 
-    public void deleteCard(int id){
-        repoCard.deleteById(id);
+    public void deleteCard(Card card){
+        repoCard.delete(card);
     }
 
 

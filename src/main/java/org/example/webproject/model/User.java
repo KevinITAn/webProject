@@ -1,26 +1,34 @@
 package org.example.webproject.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Generated;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
-@Getter @Setter @Entity
+import java.util.List;
+
+@Entity @Getter @Setter
 public class User {
 
     @Id
-    @Generated
-    private long id;
+    @GeneratedValue
+    private Long id;
 
     private String firstName;
 
     private String lastName;
 
+    @NonNull
+    @Column(unique = true)
     private String username;
 
     private String password;
 
-    private String passwordConfirm;
+    private String role;
+
+    @OneToMany
+    private List<Card> ownCards;
+
+
 
 }

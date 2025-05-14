@@ -22,7 +22,7 @@
                             <a th:href="@{/card/{id}(id=${card.id})}">
                                 <h5 class="card-title" th:text="${card.name}"></h5>
                             </a>
-                            <p class="card-header" th:text="'Author: ' + ${card.author}"></p>
+                            <p class="card-header" th:text="'Author: ' + ${card.author.getUsername()}"></p>
                             <p class="card-header" th:text="'Condition: ' + ${card.cardCondition}"></p>
                             <p class="card-header" th:text="'Description: ' + ${card.description}"></p>
                             <p class="card-header" th:text="'Date of publish: ' + ${#dates.format(card.date, 'yyyy-MM-dd')}"></p>

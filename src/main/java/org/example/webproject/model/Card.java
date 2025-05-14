@@ -20,9 +20,13 @@ public class Card {
     @Id
     @GeneratedValue
     private Integer id;
+
     private String name;
+
     private String description;
-    private String author;
+
+    @ManyToOne
+    private User author;
     //@Lob dice a JPA che è un Large Object (BLOB o CLOB).
     //columnDefinition = "LONGBLOB" forza Hibernate a generare il tipo corretto nel database.
     @Lob

@@ -1,0 +1,49 @@
+<div th:fragment="cardDetailFragment(card, currentUsername)" style="margin: 10px">
+    <!--TODO togliere lo style qui-->
+
+    <!-- HEADER -->
+    <header class="mb-4 border-bottom pb-3">
+        <h1 class="display-5 fw-bold" th:text="${card.name}">Card Name</h1>
+        <p class="text-muted" th:text="${card.name + ' details'}">Card details</p>
+    </header>
+
+    <section class="row g-4 align-items-start">
+
+        <!-- IMAGE -->
+        <div class="col-md-5 text-center">
+            <img th:src="'data:image/jpeg;base64,' + ${card.base64Img()}" class="img-fluid rounded shadow-sm" alt="card img">
+        </div>
+
+        <!-- DETAILS -->
+        <div class="col-md-7">
+            <h2 class="h4 mb-4 text-primary">Card for Sale</h2>
+
+            <dl class="row mb-3">
+                <dt class="col-sm-4">Author:</dt>
+                <dd class="col-sm-8" th:text="${card.author.getUsername()}"></dd>
+
+                <dt class="col-sm-4">Date:</dt>
+                <dd class="col-sm-8" th:text="${#dates.format(card.date, 'dd MMMM yyyy')}"></dd>
+
+                <dt class="col-sm-4">Condition:</dt>
+                <dd class="col-sm-8" th:text="${card.cardCondition}"></dd>
+
+                <dt class="col-sm-4">Type:</dt>
+                <dd class="col-sm-8" th:text="${card.type}"></dd>
+
+                <dt class="col-sm-4">Description:</dt>
+                <dd class="col-sm-8" th:text="${card.description}"></dd>
+            </dl>
+
+            <!-- ACTIONS -->
+            <div class="mt-4 d-flex gap-3" th:if="${card.author.username == currentUsername}">
+                <a th:href="@{'/card/' + ${card.id} + '/edit'}" class="btn btn-outline-primary">
+                    ✏️ Edit
+                </a>
+                <a th:href="@{'/card/' + ${card.id} + '/delete'}" class="btn btn-outline-danger">
+                    🗑️ Delete
+                </a>
+            </div>
+        </div>
+    </section>
+</div>

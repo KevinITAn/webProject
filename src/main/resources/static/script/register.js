@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (userName.value.length < 5) {
-            showError("userName", "Lo username deve essere almeno di 5 caratteri.");
+            showError("userName", "L'username deve essere almeno di 5 caratteri.");
             valid = false;
         }
 
@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function showError(inputId, message) {
         const input = document.getElementById(inputId);
         const errorDiv = document.getElementById(`${inputId}-error`);
+        console.log(errorDiv)
         input.style.border = "2px solid red";
         if (errorDiv) {
             errorDiv.textContent = message;

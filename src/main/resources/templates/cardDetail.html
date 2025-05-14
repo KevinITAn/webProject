@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" xmlns:th="http://www.thymeleaf.org">
+<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragment/head :: headFragment('The best card dealer!')"></head>
 
@@ -8,59 +8,8 @@
 <!-- Header Menu -->
 <div th:replace="fragment/navBar :: navBarFragment"></div>
 
-<div class="container py-5">
-
-    <!-- HEADER -->
-    <header class="mb-4 border-bottom pb-3">
-        <h1 class="display-5 fw-bold" th:text="${card.name}">Card Name</h1>
-        <p class="text-muted" th:text="${card.name} + ' details'">Card details</p>
-    </header>
-
-    <!-- MAIN CONTENT -->
-    <main>
-
-        <section class="row g-4 align-items-start">
-
-            <!-- IMAGE -->
-            <div class="col-md-5 text-center">
-                <img th:src="'data:image/jpeg;base64,' + ${card.base64Img()}" class="img-fluid rounded shadow-sm" alt="card img">
-            </div>
-
-            <!-- DETAILS -->
-            <div class="col-md-7">
-                <h2 class="h4 mb-4 text-primary">Card for Sale</h2>
-
-                <dl class="row mb-3">
-                    <dt class="col-sm-4">Author:</dt>
-                    <dd class="col-sm-8" th:text="${card.author}">John Doe</dd>
-
-                    <dt class="col-sm-4">Date:</dt>
-                    <dd class="col-sm-8" th:text="${#dates.format(card.date, 'dd MMMM yyyy')}">01 May 2025</dd>
-
-                    <dt class="col-sm-4">Condition:</dt>
-                    <dd class="col-sm-8" th:text="${card.cardCondition}">Excellent</dd>
-
-                    <dt class="col-sm-4">Type:</dt>
-                    <dd class="col-sm-8" th:text="${card.type}">Magic Card</dd>
-
-                    <dt class="col-sm-4">Description:</dt>
-                    <dd class="col-sm-8" th:text="${card.description}">A rare and powerful card.</dd>
-                </dl>
-
-                <!-- ACTIONS -->
-                <div class="mt-4 d-flex gap-3">
-                    <a th:href="@{'/card/' + ${card.id} + '/edit'}" class="btn btn-outline-primary">
-                        ✏️ Edit
-                    </a>
-                    <a th:href="@{'/card/' + ${card.id} + '/delete'}" class="btn btn-outline-danger">
-                        🗑️ Delete
-                    </a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-</div>
+<!--card details-->
+<div th:replace="fragment/cardDetail :: cardDetailFragment(${card}, ${currentUsername})"></div>
 
 <!-- footer Menu -->
 <div th:replace="fragment/footer :: footerFragment"></div>
