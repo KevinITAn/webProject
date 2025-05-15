@@ -1,13 +1,18 @@
 <html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="fragment/head :: headFragment('Register!')"></div>
+    <link href="/style/account.css" rel="stylesheet" />
 </head>
-<body>
-<!-- Header Menu -->
+<!-- Navbar -->
 <div th:replace="fragment/navBar :: navBarFragment"></div>
-<!--login form-->
-<div th:replace="fragment/login :: loginForm"></div>
+
+<body>
+<!-- Form wrapper con sfondo nero -->
+<div class="auth-form-wrapper">
+    <div th:replace="fragment/login :: loginForm"></div>
+</div>
+
 
 </body>
+<!-- Footer -->
 <div th:replace="/fragment/footer :: footerFragment"></div>
-</html>

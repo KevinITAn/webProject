@@ -2,57 +2,19 @@
 <html lang="it" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="fragment/head :: headFragment('Register!')"></div>
+    <link href="/style/account.css" rel="stylesheet" />
 </head>
 <body>
-<!-- Header Menu -->
 <div th:replace="fragment/navBar :: navBarFragment"></div>
 
-<!-- Form di register -->
-<div class="container d-flex justify-content-center align-items-center min-vh-100 bg-light">
-    <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; border-radius: 1rem;">
-        <h3 class="text-center mb-4">Registrati</h3>
-        <form id="registerForm" method="POST" th:action="@{/register}">
-            <!-- Token CSRF rimosso perché CSRF è disabilitato -->
+<!-- Form di registrazione -->
+<div th:replace="fragment/register :: registerForm"></div>
 
-            <div class="mb-3">
-                <label for="firstName" class="form-label">First name:</label>
-                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Mario">
-                <div class="error-message text-danger small" th:text="${firstNameError}" id="firstName-error"></div>
-            </div>
 
-            <div class="mb-3">
-                <label for="lastName" class="form-label">Last name:</label>
-                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Rossi">
-                <div class="error-message text-danger small" th:text="${lastNameError}" id="lastName-error"></div>
-            </div>
+</body>
 
-            <div class="mb-3">
-                <label for="userName" class="form-label">Username:</label>
-                <input type="text" id="userName" name="username" class="form-control" placeholder="SuperMario">
-                <div class="error-message text-danger small" th:text="${usernameError}" id="userName-error"></div>
-            </div>
-
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input id="password" type="password" name="password" class="form-control" placeholder="********">
-                <div class="error-message text-danger small" th:text="${passwordError}" id="password-error"></div>
-            </div>
-
-            <div class="mb-3">
-                <label for="passwordConfirm" class="form-label">Conferma password</label>
-                <input id="passwordConfirm" type="password" name="passwordConfirm" class="form-control" placeholder="********">
-                <div class="error-message text-danger small" id="passwordConfirm-error"></div>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">Crea account</button>
-        </form>
-    </div>
-</div>
 
 <!-- Footer -->
 <div th:replace="fragment/footer :: footerFragment"></div>
-
 <script src="/script/register.js"></script>
-
-</body>
 </html>

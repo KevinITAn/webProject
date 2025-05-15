@@ -1,0 +1,37 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+}
+
+.account-background {
+    background: linear-gradient(to bottom, #000000 0%, #111111 100%);
+    padding: 2rem;
+}
+
+.account-card {
+    background-color: rgba(30, 30, 30, 0.95);
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 400px;
+    color: white;
+    border: 1px solid #444;
+    backdrop-filter: blur(4px);
+}
+
+.account-input {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.account-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.login-input:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: #64a19d;
+    box-shadow: none;
+    color: white;
+}
