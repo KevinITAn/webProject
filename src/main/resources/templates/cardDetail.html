@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html lang="it" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<main th:replace="~{fragment/layout :: layout(
+    pageTitle='Annuncio Carta',
+    additionalCss=null,
+    additionalScript=null,
+    pageContent=~{::content}
+)}">
 
-<head th:replace="fragment/head :: headFragment('The best card dealer!')"></head>
-<link href="/style/cardDetail.css" rel="stylesheet" />
 
 
-<body style="background: black">
 
-<!-- Header Menu -->
-<div th:replace="fragment/navBar :: navBarFragment"></div>
+    <th:block th:fragment="content">
 
-<!--card details-->
-<div th:replace="fragment/cardDetail :: cardDetailFragment(${card}, ${currentUsername})"></div>
+        <div class="card" style="width: 18rem;">
+            <img th:src="'data:image/jpeg;base64,' + ${card.getBase64Img()}" class="card-img-top" alt="Immagine della carta">
+            <div class="card-body">
+                <h3 class="card-title" th:text="${card.title}"></h3>
+                <p class="card-sub-title" th:text="${card.auth}"></p>
+                <p class="card-sub-title" th:text="${card.cardCondition}"></p>
+                <p class="card-text" th:text="${card.cardDate}"></p>
+                <hr>
 
-<!-- footer Menu -->
-<div th:replace="fragment/footer :: footerFragment"></div>
+                <p class="card-text" th:text="${card.description}"></p>
+            </div>
+        </div>
 
-</body>
-</html>
+    </th:block>
+
+
+</main>

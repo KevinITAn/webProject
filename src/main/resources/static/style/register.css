@@ -1,0 +1,10 @@
+.page-background {
+    background-image: url('/images/register_img.jpg');  /* Sostituisci con il percorso della tua immagine */
+    background-size: cover;  /* Copre tutto lo spazio disponibile */
+    background-position: center;  /* Centra l'immagine */
+    background-repeat: no-repeat;  /* Evita che l'immagine si ripeta */
+    min-height: 100vh;  /* Fai in modo che lo sfondo copra almeno tutta l'altezza della pagina */
+    display: flex;  /* Allinea i contenuti centrati */
+    justify-content: center;  /* Centra orizzontalmente */
+    align-items: center;  /* Centra verticalmente */
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<main th:replace="~{fragment/layout :: layout(
+    pageTitle='Sell a Card',
+    additionalCss=null,
+    additionalScript=null,
+    pageContent=~{::content}
+)}">
+    <section th:fragment="content">
+        <div class="container">
+            <h2>Sell card</h2>
+            <form th:action="@{/card/new}" th:object="${card}" method="post" enctype="multipart/form-data">
+                <div class="form-group mb-3">
+                    <label for="title" class="form-label">Card name:</label>
+                    <input type="text" class="form-control" id="title" th:field="*{title}" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="auth" class="form-label">auth:</label>
+                    <input type="text" class="form-control" id="auth" th:field="*{auth}" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea class="form-control" id="description" th:field="*{description}" rows="3" required></textarea>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="cardDate" class="form-label">Date:</label>
+                    <input type="date" class="form-control" id="cardDate" th:field="*{cardDate}" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="cardCondition" class="form-label">Card condition:</label>
+                    <select id="cardCondition" name="cardCondition" th:field="*{cardCondition}">
+                        <option value="PERFETTA">PERFETTA</option>
+                        <option value="BENE">BENE</option>
+                        <option value="MEDIA" selected>MEDIA</option>
+                        <option value="PESSIMA">PESSIMA</option>
+                    </select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="img" class="form-label">Image:</label>
+                    <input id="img" type="file" name="img" class="form-control" accept="image/*" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Publish!!</button>
+            </form>
+        </div>
+    </section>
+</main>

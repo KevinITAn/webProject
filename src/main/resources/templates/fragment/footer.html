@@ -1,9 +1,9 @@
-<footer th:fragment="footerFragment"
-        class="footer bg-light text-muted d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-  <div class="col-md-4 d-flex align-items-center">
-    <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1" aria-label="Bootstrap">
-      <svg class="bi" width="30" height="24" aria-hidden="true"><use xlink:href="#bootstrap"></use></svg>
-    </a>
-    <span class="mb-3 mb-md-0 text-muted">Copyleft CC-by 2025 by Kevin Croce</span>
-  </div>
+<footer th:fragment="footer(additionalScript)" class="bg-body-tertiary text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
+        <p>© 2020 Copyright: kevin croce 2025-SUPSI</p>
+    </div>
+    <!-- script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+    <script th:if="${additionalScript}!=null" th:href="@{/script/{css}(css=${additionalScript})}"></script>
 </footer>

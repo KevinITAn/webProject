@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html
+        style="height: 100%"
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        th:fragment="layout(pageTitle, additionalCss, additionalScript, pageContent)"
+>
+<!--head replace-->
+<head th:replace="~{fragment/head :: head(pageTitle=${pageTitle}, additionalCss=${additionalCss})}"></head>
+
+<body style="height: 100%; margin: 0; display: flex; flex-direction: column;">
+<!--navbar-->
+<th:block th:replace="~{fragment/navbar :: navbar}"></th:block>
+
+<!--main content with sidebar-->
+<div class="flex-grow-1 overflow-hidden">
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <main class="col-12 p-4 h-100 overflow-auto">
+                <th:block th:replace="${pageContent}"></th:block>
+            </main>
+        </div>
+    </div>
+</div>
+
+<!--footer replace-->
+<footer th:replace="~{fragment/footer :: footer(additionalScript=${additionalScript})}"></footer>
+</body>
+</html>
