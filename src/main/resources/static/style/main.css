@@ -6,13 +6,17 @@
     font-family: 'Poppins', sans-serif;
 }
 
-html,body{
+html, body {
     height: 100%;
+    width: 100%;
 }
 
 body {
     background-color: #f8f9fa;
     color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Navigation */
@@ -48,9 +52,7 @@ nav ul li img {
     width: 3%;
     height: 3%;
     border-radius: 50%;
-    /* Per un'icona circolare */
     object-fit: cover;
-    /* Evita distorsioni */
 }
 
 nav ul li a:hover {
@@ -61,21 +63,19 @@ nav ul li a:hover {
 .mainContent {
     display: grid;
     grid-template-columns: 1fr 250px;
-    /* Colonna principale + Sidebar */
     gap: 20px;
-    /* Spazio tra contenuto e aside */
     align-items: start;
-    /* Allinea gli elementi in alto */
     margin-top: 30px;
-    height: 100%;
+    width: 100%;
 }
 
 /* Card Container */
 .container {
     display: flex;
     flex-wrap: wrap;
-    /* Se non ci stanno in una riga, vanno a capo */
     gap: 20px;
+    width: 100%;
+    padding: 0;
 }
 
 /* Card Announcement */
@@ -88,7 +88,7 @@ nav ul li a:hover {
     text-align: center;
     transition: transform 0.3s ease-in-out;
 }
-/*se nel DOM elemento vuoto allora non applica cardAnnuncmente*/
+
 .card:empty {
     display: none;
 }
@@ -112,53 +112,26 @@ nav ul li a:hover {
     border-radius: 8px;
     margin-top: 10px;
 }
-
-/* Sidebar */
-aside {
-    background: #2c3e50;
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-aside h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-aside ul {
-    list-style: none;
-}
-
-aside ul li {
-    margin-bottom: 8px;
-}
-
-aside ul li a {
-    color: #1abc9c;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-aside ul li a:hover {
-    text-decoration: underline;
-}
-
 /* Footer */
 footer {
-    margin-top: 30px;
-    text-align: center;
-    padding: 10px;
+    margin-top: auto;
+    padding: 10px 0;
     background: #2c3e50;
     color: white;
+    text-align: center;
+    width: 100%;
+    border: none;
+    box-shadow: none;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .mainContent {
         grid-template-columns: 1fr;
-        /* Sidebar va sotto il contenuto */
+    }
+
+    .pokemon-news {
+        display: none; /* Nasconde l'aside su schermi piccoli */
     }
 
     aside {

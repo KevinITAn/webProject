@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<main th:replace="~{fragment/layout :: layout(
+    pageTitle='Register!',
+    additionalCss='account.css',
+    additionalScript=null,
+    pageContent=~{::content}
+)}">
+    <section th:fragment="content">
+        <!-- Form wrapper con sfondo nero -->
+        <div class="auth-form-wrapper">
+            <div th:replace="fragment/login :: loginForm"></div>
+        </div>
+    </section>
+</main>

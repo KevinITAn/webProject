@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<main th:replace="~{fragment/layout :: layout(
+    pageTitle='Not permit page',
+    additionalCss=null,
+    additionalScript=null,
+    pageContent=~{::content}
+)}">
+  <section th:fragment="content">
+    <h1>Sorry you don't have permit</h1>
+  </section>
+</main>

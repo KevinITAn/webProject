@@ -10573,3 +10573,24 @@ body {
     color: #fff;
     font-weight: bold;
 }
+
+
+/* Sidebar / Pokémon News */
+
+.pokemon-news {
+    background: #808080;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.pokemon-news h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.pokemon-news ul li {
+    margin-bottom: 8px;
+}
+

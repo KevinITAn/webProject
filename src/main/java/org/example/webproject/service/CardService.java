@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,27 @@ public class CardService {
             cardRsc.setImg(file.getBytes());
         //persisto le info
         repoCard.save(cardRsc);
+    }
+
+    public List<Card> search(String field, String query) {
+        if (field == null || query == null) {
+            return Collections.emptyList();
+        }
+
+        switch (field.toLowerCase()) { // Case-insensitive per sicurezza
+            case "name":
+                return repoCard.findByNameContainingIgnoreCase(query);
+            case "description":
+                return repoCard.findByDescriptionContainingIgnoreCase(query);
+            case "author":
+                return repoCard.findByAuthorUsernameContainingIgnoreCase(query);
+            case "type":
+                    return repoCard.findByType(CardType.valueOf(query.toUpperCase()));
+            case "cardcondition":
+                    return repoCard.findByCardCondition(CardCondition.valueOf(query.toUpperCase()));
+            default:
+                return Collections.emptyList();
+        }
     }
 
     public List<Card> getCardList(){

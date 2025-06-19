@@ -1,33 +1,76 @@
 <!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
 <main th:replace="~{fragment/layout :: layout(
-    pageTitle='Annuncio Carta',
-    additionalCss=null,
+    pageTitle='Card Collector\'s Haven',
+    additionalCss='home.css',
     additionalScript=null,
     pageContent=~{::content}
 )}">
     <section th:fragment="content">
-        <div class="container">
-            <div class="row">
-                <!-- Itera su una lista di card passata dal controller -->
-                <th:block th:each="card : ${cards}">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <a th:href="@{/card/${card.id}}">
-                            <div class="card" style="width: 18rem;">
-                                <img th:src="'data:image/jpeg;base64,' + ${card.getBase64Img()}" class="card-img-top" alt="Immagine della carta">
-                                <div class="card-body">
-                                    <h3 class="card-title" th:text="${card.title}"></h3>
-                                    <p class="card-sub-title" th:text="${card.auth}"></p>
-                                    <p class="card-sub-title" th:text="${card.cardCondition}"></p>
-                                    <p class="card-text" th:text="${card.cardDate}"></p>
-                                    <hr>
-
-                                    <p class="card-text" th:text="${card.description.substring(0,5)+'...'}.split"></p>
-                                </div>
-                            </div>
-                        </a>
+        <!-- Masthead -->
+        <header class="masthead">
+            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <div class="text-center">
+                        <h1 class="mx-auto my-0 text-uppercase">Card Collector's Haven</h1>
+                        <h2 class="text-white-50 mx-auto mt-2 mb-5">Your ultimate destination to buy and sell Pokémon and
+                            trading cards!</h2>
                     </div>
-                </th:block>
+                </div>
             </div>
-        </div>
+        </header>
+        <!-- About -->
+        <section class="about-section text-center" id="about">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-white mb-4">Trade with Confidence</h2>
+                        <p class="text-white-50">
+                            Discover a vast collection of Pokémon, Yu-Gi-Oh!, and other trading cards. Whether you're a
+                            collector or a seller, our platform makes trading easy, secure, and fun. Start your collection
+                            today!
+                        </p>
+                    </div>
+                </div>
+                <img class="img-fluid mt-4" src="/images/index_background.jpg" alt="Trading Cards"/>
+            </div>
+        </section>
+        <!-- Projects (Featured Cards) with Aside -->
+        <section class="cards-section py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Featured Cards</h2>
+                <div class="row">
+                    <div class="col-12 col-lg-9">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                            <div th:each="card : ${cards}" class="col">
+                                <a th:href="@{/card/{id}(id=${card.id})}" class="text-decoration-none">
+                                    <div class="card h-100 shadow-sm border-0 rounded-4">
+                                        <img th:src="'data:image/jpeg;base64,' + ${card.base64Img()}" class="card-img-top rounded-top-4"
+                                             alt="card img">
+                                        <div class="card-body">
+                                            <h5 class="card-title" th:text="${card.name}"></h5>
+                                            <p class="card-text" th:text="'Author: ' + ${card.author.getUsername()}"></p>
+                                            <p class="card-text" th:text="'Condition: ' + ${card.cardCondition}"></p>
+                                            <p class="card-text" th:text="'Description: ' + ${card.description}"></p>
+                                            <p class="card-text"
+                                               th:text="'Date of publish: ' + ${#dates.format(card.date, 'yyyy-MM-dd')}"></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="col-12 col-lg-3 pokemon-news">
+                        <h3>Pokémon News</h3>
+                        <ul>
+                            <li><strong>June 19, 2025:</strong> New Pokémon Scarlet & Violet expansion announced with rare cards!</li>
+                            <li><strong>June 15, 2025:</strong> Charizard EX card breaks sales record at $500,000.</li>
+                            <li><strong>June 10, 2025:</strong> Pikachu promo card released for 2025 tournament season.</li>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </section>
     </section>
 </main>

@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity @Getter @Setter
+@Table(name = "users")
 public class User {
 
     @Id
@@ -28,6 +30,13 @@ public class User {
 
     @OneToMany
     private List<Card> ownCards;
+
+    @OneToMany
+    private List<Card> cart;
+
+    public void addCart(Card card) {
+        cart.add(card);
+    }
 
 
 

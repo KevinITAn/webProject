@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<main th:replace="~{fragment/layout :: layout(
+    pageTitle='Il tuo Carrello',
+    additionalCss=null,
+    additionalScript=null,
+    pageContent=~{::content}
+)}">
+    <section th:fragment="content">
+        <!-- Intestazione del carrello -->
+        <header class="masthead bg-dark text-white">
+            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+                <div class="text-center">
+                    <h1 class="mx-auto my-0 text-uppercase">Il tuo Carrello</h1>
+                    <h2 class="text-white-50 mx-auto mt-2 mb-5">Controlla le carte prima di procedere all'acquisto</h2>
+                </div>
+            </div>
+        </header>
+
+        <!-- Sezione Carrello -->
+        <section class="cart-section py-5">
+            <div class="container">
+                <h2 class="text-center mb-4">Carte nel tuo carrello</h2>
+                <div th:if="${#lists.isEmpty(cartCards)}" class="text-center text-muted">
+                    <p>Il tuo carrello è vuoto.</p>
+                </div>
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" th:if="${!#lists.isEmpty(cartCards)}">
+                    <div th:each="card : ${cartCards}" class="col">
+                        <div class="card h-100 shadow-sm border-0 rounded-4">
+                            <img th:src="'data:image/jpeg;base64,' + ${card.base64Img()}" class="card-img-top rounded-top-4"
+                                 alt="card img">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="${card.name}"></h5>
+                                <p class="card-text" th:text="'Autore: ' + ${card.author.getUsername()}"></p>
+                                <p class="card-text" th:text="'Condizione: ' + ${card.cardCondition}"></p>
+                                <p class="card-text" th:text="'Descrizione: ' + ${card.description}"></p>
+                                <p class="card-text"
+                                   th:text="'Data pubblicazione: ' + ${#dates.format(card.date, 'yyyy-MM-dd')}"></p>
+                                <form th:action="@{/cart/{idCard}/remove(idCard=${card.id})}" method="post">
+                                    <button type="submit" class="btn btn-danger mt-2">Rimuovi</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pulsante Checkout -->
+                <div class="text-center mt-5" th:if="${!#lists.isEmpty(cartCards)}">
+                    <form th:action="@{/checkout}" method="post">
+                        <button type="submit" class="btn btn-success btn-lg">Procedi al Checkout</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </section>
+</main>

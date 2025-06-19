@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<main th:replace="~{fragment/layout :: layout(
+    pageTitle='Risultati ricerca',
+    additionalCss='cards.css',
+    additionalScript=null,
+    pageContent=~{::content}
+)}">
+    <section th:fragment="content">
+        <div class="container py-4">
+            <h2>Risultati della ricerca</h2>
+
+            <!-- Messaggio se la lista è vuota -->
+            <div th:if="${cards == null or #lists.isEmpty(cards)}">
+                <p>Nessuna carta trovata.</p>
+            </div>
+
+            <!-- Visualizzazione delle carte se la lista non è vuota -->
+            <div th:unless="${cards == null or #lists.isEmpty(cards)}" class="row row-cols-1 row-cols-md-3 g-4">
+                <div th:each="card : ${cards}" class="col">
+                    <div class="card h-100">
+                        <img th:src="'data:image/jpeg;base64,' + ${card.base64Img()}" class="card-img-top" alt="Immagine carta" />
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${card.name}">Nome carta</h5>
+                            <p class="card-text" th:text="${card.description}">Descrizione carta</p>
+                            <p class="card-text"><small class="text-muted" th:text="'Autore: ' + ${card.author.username}">Autore</small></p>
+                            <p class="card-text"><small class="text-muted" th:text="'Tipo: ' + ${card.type}">Tipo</small></p>
+                            <p class="card-text"><small class="text-muted" th:text="'Condizione: ' + ${card.cardCondition}">Condizione</small></p>
+                            <p class="card-text"><small class="text-muted" th:text="'Data: ' + ${#dates.format(card.date, 'yyyy-MM-dd')}">Data</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

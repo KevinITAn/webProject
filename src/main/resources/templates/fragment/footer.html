@@ -1,9 +1,7 @@
-<footer th:fragment="footer(additionalScript)" class="bg-body-tertiary text-center text-lg-start">
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
-        <p>© 2020 Copyright: kevin croce 2025-SUPSI</p>
-    </div>
-    <!-- script -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-    <script th:if="${additionalScript}!=null" th:href="@{/script/{css}(css=${additionalScript})}"></script>
+<footer th:fragment="footer(additionalScript)">
+  <p style="margin: 0; padding: 0;">Copyright © 2025 by Kevin Croce</p>
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Script personalizzato, se presente -->
+  <script th:if="${additionalScript != null}" th:src="@{${additionalScript}}"></script>
 </footer>

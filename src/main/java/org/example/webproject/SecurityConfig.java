@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/card/*/edit", "/card/*/delete", "/card/new").hasRole("ADMIN")
-                        .requestMatchers("/", "/index", "/notFoundCard", "/register", "/login", "/error", "/card/*", "/style/**", "/script/**", "/images/**").permitAll()
+                        .requestMatchers("/", "/index", "/notFoundCard", "/register", "/login", "/error", "/card/*", "/style/**", "/script/**", "/images/**","/search","/search/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

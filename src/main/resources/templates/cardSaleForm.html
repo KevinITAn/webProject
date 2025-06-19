@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<main th:replace="~{fragment/layout :: layout(
+    pageTitle='Sale Card',
+    additionalCss='account.css',
+    additionalScript=null,
+    pageContent=~{::content}
+)}">
+    <section th:fragment="content">
+        <!-- Form di vendita carta -->
+        <div th:replace="fragment/cardForm :: formFragment(${actionUrl}, ${card})"></div>
+    </section>
+</main>

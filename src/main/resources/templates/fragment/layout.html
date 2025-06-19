@@ -13,17 +13,15 @@
 <th:block th:replace="~{fragment/navbar :: navbar}"></th:block>
 
 <!--main content with sidebar-->
-<div class="flex-grow-1 overflow-hidden">
-    <div class="container-fluid h-100">
-        <div class="row h-100">
-            <main class="col-12 p-4 h-100 overflow-auto">
-                <th:block th:replace="${pageContent}"></th:block>
-            </main>
-        </div>
+<div class="flex-grow-1 overflow-hidden" style="width: 100%; padding: 0;">
+    <div class="row h-100" style="margin: 0;">
+        <main class="col-12 h-100 overflow-auto" style="padding: 0;">
+            <th:block th:replace="${pageContent}"></th:block>
+        </main>
     </div>
 </div>
 
 <!--footer replace-->
-<footer th:replace="~{fragment/footer :: footer(additionalScript=${additionalScript})}"></footer>
+<footer th:replace="~{fragment/footer :: footer(additionalScript=${additionalScript})}" style="margin: 0; padding: 0;"></footer>
 </body>
 </html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<main th:replace="~{fragment/layout :: layout(
+    pageTitle='Edit card',
+    additionalCss='account.css',
+    additionalScript=null,
+    pageContent=~{::content}
+)}">
+    <section th:fragment="content">
+        <!-- Form di modifica -->
+        <div th:replace="fragment/cardForm :: formFragment(${actionUrl}, ${card})"></div>
+    </section>
+</main>

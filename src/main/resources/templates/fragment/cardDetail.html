@@ -1,0 +1,51 @@
+<div th:fragment="cardDetailFragment(card, currentUsername)" class="card-detail-container">
+    <!-- HEADER -->
+    <header>
+        <h1 th:text="${card.name}">Card Name</h1>
+        <p th:text="${card.name + ' details'}">Card details</p>
+    </header>
+
+    <section class="card-detail-content">
+        <!-- IMAGE -->
+        <div class="card-detail-image">
+            <img th:src="'data:image/jpeg;base64,' + ${card.base64Img()}" alt="card image" />
+        </div>
+
+        <!-- DETAILS -->
+        <div class="card-detail-info">
+            <h2>Card for Sale</h2>
+            <dl>
+                <dt>Author:</dt>
+                <dd th:text="${card.author.getUsername()}">Author Name</dd>
+
+                <dt>Date:</dt>
+                <dd th:text="${#dates.format(card.date, 'dd MMMM yyyy')}">Date</dd>
+
+                <dt>Condition:</dt>
+                <dd th:text="${card.cardCondition}">Condition</dd>
+
+                <dt>Type:</dt>
+                <dd th:text="${card.type}">Type</dd>
+
+                <dt>Description:</dt>
+                <dd th:text="${card.description}">Description</dd>
+            </dl>
+
+            <!-- ACTIONS -->
+            <div class="card-detail-actions d-flex gap-2">
+                <!-- Solo se non sei autore e autenticato -->
+                <!-- uso form perchè usare POST-->
+                <form sec:authorize="isAuthenticated()" th:if="${card.author.username != currentUsername}" th:action="@{'/cart/' + ${card.id} + '/add'}" method="post">
+                    <button type="submit" class="btn btn-outline-primary">🛒 Add to cart!</button>
+                </form>
+
+                <!-- Solo per l'autore -->
+                <div th:if="${card.author.username == currentUsername}" class="d-flex gap-2">
+                    <a th:href="@{'/card/' + ${card.id} + '/edit'}" class="btn btn-outline-secondary">✏️ Edit</a>
+                    <a th:href="@{'/card/' + ${card.id} + '/delete'}" class="btn btn-outline-danger">🗑️ Delete</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>

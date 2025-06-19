@@ -1,5 +1,6 @@
 package org.example.webproject.controller;
 
+import jakarta.annotation.PostConstruct;
 import org.example.webproject.model.Card;
 import org.example.webproject.model.CardCondition;
 import org.example.webproject.model.CardType;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.IOException;
 import java.util.Date;
@@ -26,17 +28,28 @@ public class MainController {
     private final CardService cardService;
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    public MainController(CardService cardService, UserService userService) {
+    public MainController(CardService cardService, UserService userService, PasswordEncoder passwordEncoder) {
         this.cardService = cardService;
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @PostConstruct
+    public void init() {
+        if (userService.countUsers() == 0) {
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(passwordEncoder.encode("admin")); // Codifica la password
+            admin.setRole("ADMIN"); // Salva come "ADMIN", sarà trasformato in "ROLE_ADMIN" nel UserDetailsService
+            userService.createUser(admin);
+        }
     }
 
     @GetMapping("/")
     public String getHomePage(Model model) {
         List<Card> cardList=cardService.getCardList();
-        for(Card src : cardList)
-            System.out.println(src.getName());
         model.addAttribute("cards",cardList);
         return "index";
     }
@@ -71,7 +84,7 @@ public class MainController {
         String loggedUsername = SecurityContextHolder.getContext().getAuthentication().getName();
 
         if (!card.getAuthor().getUsername().equals(loggedUsername)) {
-            return "redirect:/notFoundCard";//TODO vedere se posso modificare in modo bello
+            return "redirect:/notPermit";
         }
 
         model.addAttribute("card", card);
@@ -86,7 +99,7 @@ public class MainController {
         String loggedUsername = SecurityContextHolder.getContext().getAuthentication().getName();
 
         if (!card.getAuthor().getUsername().equals(loggedUsername)) {
-            return "redirect:/notFoundCard";//TODO vedere se posso modificare in modo bello
+            return "redirect:/notPermit";
         }
 
         cardService.deleteCard(card);
@@ -96,6 +109,60 @@ public class MainController {
     @GetMapping("/notFoundCard")
     public String notFoundCard() {
         return "notFoundCard";
+    }
+
+    @GetMapping("/notPermit")
+    public String notPermit() {
+        return "notPermit";
+    }
+
+    @GetMapping("/cart")
+    public String viewCart(Model model , @AuthenticationPrincipal UserDetails userDetails){
+        //user attualmente loggato
+        String username = userDetails.getUsername();
+        User user = userService.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        System.out.println(userService.getCart(user));
+        model.addAttribute("cartCards", userService.getCart(user));
+        return "cartDetail";
+    }
+
+    @GetMapping("/search")
+    public String search(
+            @RequestParam(name = "field") String field,
+            @RequestParam(name = "q") String query,
+            Model model) {
+        List<Card> results = cardService.search(field, query);
+        model.addAttribute("cards", results);
+        return "searchDetail";
+    }
+
+
+    //--------POST-------
+
+    @PostMapping("/cart/{idCard}/remove")
+    public String removeCart(@PathVariable int idCard, @AuthenticationPrincipal UserDetails userDetails){
+        Card card = cardService.getCardById(idCard);
+        //user attualmente loggato
+        String username = userDetails.getUsername();
+        User user = userService.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        userService.removeCart(user,card);
+
+        return "redirect:/cart";
+    }
+
+    @PostMapping("/cart/{idCard}/add")
+    public String addCart(@PathVariable int idCard,@AuthenticationPrincipal UserDetails userDetails){
+        Card card = cardService.getCardById(idCard);
+        //user attualmente loggato
+        String username = userDetails.getUsername();
+        User user = userService.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        userService.addCart(user,card);
+
+        return "redirect:/";
     }
 
     @PostMapping("/card/{id}/edit")
@@ -141,5 +208,6 @@ public class MainController {
         cardService.saveCard(card);
         return "redirect:/";
     }
+
 
 }

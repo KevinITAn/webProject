@@ -56,7 +56,7 @@ public class UserController {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("ROLE_ADMIN"); // TODO: cambia in "ROLE_USER" solo per test "ROLE_ADMIN"
+        user.setRole("ROLE_USER");
         userService.createUser(user);
 
         return "redirect:/login";

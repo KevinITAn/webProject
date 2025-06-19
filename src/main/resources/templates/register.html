@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<main th:replace="~{fragment/layout :: layout(
+    pageTitle='Register!',
+    additionalCss='account.css',
+    additionalScript='/script/register.js',
+    pageContent=~{::content}
+)}">
+    <section th:fragment="content">
+        <!-- Form di registrazione -->
+        <div th:replace="fragment/register :: registerForm"></div>
+    </section>
+</main>

@@ -23,21 +23,26 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepo.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Utente non trovato: " + username));
 
-
+        // Gestione del ruolo
         String role = user.getRole();
         if (role == null || role.isBlank()) {
-            role = "ROLE_USER";
+            role = "ROLE_USER"; // Default role
         } else if (!role.startsWith("ROLE_")) {
-            role = "ROLE_" + role.trim().toUpperCase();
+            role = "ROLE_" + role.trim().toUpperCase(); // Assicurati che inizi con ROLE_
         }
 
-        List<GrantedAuthority> auth = AuthorityUtils.createAuthorityList(role);
+        // Crea le autorità basate sul ruolo
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(role);
 
+        // Restituisci UserDetails con i dati dell'utente
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
-                user.getPassword(),
-                true, true, true, true,
-                auth
+                user.getPassword(), // Deve essere codificata (es. con BCrypt)
+                true, // accountNonExpired
+                true, // accountNonLocked
+                true, // credentialsNonExpired
+                true, // enabled
+                authorities
         );
     }
 }
